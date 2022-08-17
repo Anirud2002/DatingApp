@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.Helpers;
 using API.Middleware;
 using Microsoft.OpenApi.Models;
 
@@ -16,6 +17,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(_config);
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddControllers();
             services.AddCors();
             services.AddIdentityServices(_config);

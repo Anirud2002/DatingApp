@@ -14,14 +14,14 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(private accountService: AccountService) {}
   
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let curretnUser: User;
+    let currentUser: User;
 
-    this.accountService.currentUser$.pipe(take(1)).subscribe(user => curretnUser = user)
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => currentUser = user)
 
-    if(curretnUser){
+    if(currentUser){
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${curretnUser.token}`
+          Authorization: `Bearer ${currentUser.token}`
         }
       })
     }
